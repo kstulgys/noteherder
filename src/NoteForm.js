@@ -3,6 +3,12 @@ import './NoteForm.css'
 import React, { Component } from 'react';
 
 class NoteForm extends Component {
+  hangleChanges = (ev) => {
+    const note = {...this.props.currentNote}
+    note[ev.target.name] = ev.target.value
+    this.props.saveNote(note)
+  }
+
   render() {
 
     const { currentNote } = this.props
@@ -20,11 +26,13 @@ class NoteForm extends Component {
                 name="title"
                 placeholder="Title your note"
                 value={currentNote.title}
+                onChange={this.hangleChanges}
               />
             </p>
             
             <textarea name="body"
               value={currentNote.body}
+              onChange={this.hangleChanges}
             >
 
             </textarea>
