@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Main from './Main'
+import base from './base'
 
 import './App.css'
 
@@ -10,6 +11,16 @@ class App extends Component {
       notes: {},
       currentNote: this.blankNote(),
    }
+  }
+
+  componentDidMount = () => {
+    base.syncState(
+      'notes', 
+      {
+        context: this,
+        state: 'notes',
+      }
+    )
   }
 
 
@@ -42,7 +53,8 @@ class App extends Component {
 
   removeCurrentNote = (note) => {
     const notes = {...this.state.notes}
-    delete notes[this.state.currentNote.id]
+    notes[this.state.currentNote.id] = null
+    
     this.setState({ notes })
     this.resetCurrentNote()
   }
