@@ -7,19 +7,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      notes: {
-       'note-4': {
-         id: 'note-4',
-         title: 'My fancy note from app.js',
-         body: 'Fancy body jadajada jada',
-       },
-       'note-5': {
-         id: 'note-5',
-         title: 'Another fancy note',
-         body: 'Fancy body jadajada jada',
-       },
-     },
-     currentNote: this.blankNote(),
+      notes: {},
+      currentNote: this.blankNote(),
    }
   }
 
@@ -50,6 +39,13 @@ class App extends Component {
     this.setState({ notes })
     this.setCurrentNote(note)
   }
+
+  removeCurrentNote = (note) => {
+    const notes = {...this.state.notes}
+    delete notes[this.state.currentNote.id]
+    this.setState({ notes })
+    this.resetCurrentNote()
+  }
   
 
   render() {
@@ -57,6 +53,7 @@ class App extends Component {
       setCurrentNote: this.setCurrentNote,
       resetCurrentNote: this.resetCurrentNote,
       saveNote: this.saveNote,
+      removeCurrentNote: this.removeCurrentNote,
     }
     return (
       <div className="App">

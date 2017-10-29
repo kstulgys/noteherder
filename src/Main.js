@@ -13,6 +13,7 @@ const Main = (props) => {
         setCurrentNote={props.setCurrentNote}
         />
         <NoteForm 
+          removeCurrentNote={props.removeCurrentNote}
           currentNote={props.currentNote}
           saveNote={props.saveNote}
         />
