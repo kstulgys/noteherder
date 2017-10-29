@@ -4,11 +4,11 @@ import Sidebar from './Sidebar'
 import NoteList from './NoteList'
 import NoteForm from './NoteForm'
 
-const Main = () => {
+const Main = (props) => {
   return (
       <div className="Main">
         <Sidebar />
-        <NoteList />
+        <NoteList notes={props.notes}/>
         <NoteForm />
       </div>
   )
