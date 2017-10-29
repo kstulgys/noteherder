@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Main from './Main'
-import base from './base'
+import base, {auth} from './base'
 import SignIn from './SignIn'
 import './App.css'
 
@@ -64,12 +64,13 @@ class App extends Component {
     return this.state.uid
   }
 
-  handleAuth = () => {
-    this.setState({ uid: 'kkksss' })
+  handleAuth = (result) => {
+    this.setState({ uid: result.user.uid })
   }
 
   signOut = () => {
-    this.setState({ uid: null })
+    auth.signOut()
+    .then(() => this.setState({ uid: null }))
   }
 
   render() {
