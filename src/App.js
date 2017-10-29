@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Main from './Main'
 import base from './base'
-
+import SignIn from './SignIn'
 import './App.css'
 
 class App extends Component {
@@ -10,6 +10,7 @@ class App extends Component {
     this.state = {
       notes: {},
       currentNote: this.blankNote(),
+      uid: null,
    }
   }
 
@@ -59,6 +60,17 @@ class App extends Component {
     this.resetCurrentNote()
   }
   
+  signedIn = () => {
+    return this.state.uid
+  }
+
+  handleAuth = () => {
+    this.setState({ uid: 'kkksss' })
+  }
+
+  signOut = () => {
+    this.setState({ uid: null })
+  }
 
   render() {
     const actions = {
@@ -66,6 +78,7 @@ class App extends Component {
       resetCurrentNote: this.resetCurrentNote,
       saveNote: this.saveNote,
       removeCurrentNote: this.removeCurrentNote,
+      signOut: this.signOut,
     }
     const noteData = {
       notes: this.state.notes,
@@ -74,10 +87,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Main  
-        {...noteData}
-        {...actions}
-        />
+        {
+          this.signedIn() ? 
+          <Main  {...noteData}{...actions}/> 
+          : <SignIn  handleAuth={this.handleAuth}/> 
+        }
+
 
       </div>
     );
