@@ -16,16 +16,28 @@ class App extends Component {
         title: 'Another fancy note',
         body: 'Fancy body jadajada jada',
       }
+    },
+    currentNote: {
+      id: null,
+      title: '',
+      body: '',
     }
   }
   
+  setCurrentNote = (note) => {
+    this.setState({currentNote: note})
+  }
   
 
   render() {
     console.log(this.state)
     return (
       <div className="App">
-        <Main  notes={this.state.notes}/>
+        <Main  
+        notes={this.state.notes}
+        currentNote={this.state.currentNote}
+        setCurrentNote={this.setCurrentNote}
+        />
 
       </div>
     );
