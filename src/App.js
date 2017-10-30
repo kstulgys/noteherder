@@ -9,7 +9,7 @@ class App extends Component {
     super();
     this.state = {
       notes: {},
-      currentNote: this.blankNote(),
+      currentNoteId: null,
       uid: null,
    }
   }
@@ -42,22 +42,13 @@ getUserFromLocalStorage = () => {
     )
   }
 
-
-  blankNote = () => {
-    return {
-      id: null,
-      title: '',
-      body: '',
-    }
-
-  }
   
   setCurrentNote = (note) => {
-    this.setState({currentNote: note})
+    this.setState({currentNoteId: note.id})
   }
 
   resetCurrentNote = (note) => {
-    this.setCurrentNote(this.blankNote())
+    this.setCurrentNote({id: null})
   }
 
   saveNote = (note) => {
@@ -72,7 +63,7 @@ getUserFromLocalStorage = () => {
 
   removeCurrentNote = (note) => {
     const notes = {...this.state.notes}
-    notes[this.state.currentNote.id] = null
+    notes[this.state.currentNoteId] = null
     
     this.setState({ notes })
     this.resetCurrentNote()
@@ -119,7 +110,7 @@ getUserFromLocalStorage = () => {
     }
     const noteData = {
       notes: this.state.notes,
-      currentNote: this.state.currentNote,
+      currentNoteId: this.state.currentNoteId,
     }
 
     return (

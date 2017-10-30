@@ -3,41 +3,53 @@ import './NoteForm.css'
 import RichTextEditor from 'react-rte';
 
 class NoteForm extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      editorValue: RichTextEditor.createEmptyValue()
+      note: this.blankNote(),
+      editorValue: RichTextEditor.createEmptyValue(),
     }
   }
 
-  // componentWillReceiveProps = (nextProps) => {
-  //   const note = nextProps.currentNote
+  componentWillReceiveProps = (nextProps) => {
+    const noteId = nextProps.currentNoteId
+    const note = nextProps.notes[noteId] || this.blankNote()
 
-  //   let editorValue = this.state.editorValue
+    let editorValue = this.state.editorValue
+    if (editorValue.toString('html') !== note.body) {
+      editorValue = RichTextEditor.createValueFromString(note.body, 'html')
+    }
+    this.setState({ editorValue })
+  }
 
-  //   if (editorValue.toString('html') !== note.body) {
-  //     editorValue = RichTextEditor.createValueFromString(note.body, 'html')
-  //   }
-  //   this.setState({ editorValue })
-  // }
+  blankNote = () => {
+    return {
+      id: null,
+      title: '',
+      body: '',
+    }
+
+  }
 
   hangleChanges = (ev) => {
-    const note = {...this.props.currentNote}
+    const note = {...this.state.note}
     note[ev.target.name] = ev.target.value
-    this.props.saveNote(note)
+    this.setState(
+      {note},
+      () => this.props.saveNote(note)
+    )
   }
 
   handleEditorChanges = (editorValue) => {
-    this.setState({ editorValue })
-
-    const note = {...this.props.currentNote}
+    const note = {...this.state.note}
     note.body = editorValue.toString('html')
-    this.props.saveNote(note)
+    this.setState(
+      { note, editorValue },
+      () => this.props.saveNote(note)
+    )
   }
 
   render() {
-
-    const { currentNote } = this.props
     return (
       <div className="NoteForm">
           <div className="form-actions">
@@ -54,7 +66,7 @@ class NoteForm extends Component {
                 type="text"
                 name="title"
                 placeholder="Title your note"
-                value={currentNote.title}
+                value={this.state.note.title}
                 onChange={this.hangleChanges}
               />
             </p>
