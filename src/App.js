@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       notes: {},
       uid: null,
+      firebaseNotesSynced: false,
    }
   }
   componentWillMount = () => {
@@ -38,6 +39,7 @@ getUserFromLocalStorage = () => {
       {
         context: this,
         state: 'notes',
+        then: () => this.setState({firebaseNotesSynced: true})
       }
     )
   }
@@ -62,7 +64,7 @@ getUserFromLocalStorage = () => {
     this.resetCurrentNote()
     this.setState(
       { notes },
-      this.props.history.push('/notes')
+      this.props.history.replace('/notes')
     )
   }
   
@@ -120,6 +122,7 @@ getUserFromLocalStorage = () => {
               ? <Main 
                 {...actions}
                 notes={this.state.notes}
+                firebaseNotesSynced={this.state.firebaseNotesSynced}
               />
               : <Redirect to="/sign-in" />
             )} 

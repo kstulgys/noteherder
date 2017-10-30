@@ -15,7 +15,7 @@ const Main = (props) => {
 
       <Switch>
         <Route path="/notes/:id" render={(navProps) => (
-          <NoteForm {...props} {...navProps} />
+          <NoteForm {...props} {...navProps} firebaseNotesSynced={props.firebaseNotesSynced}/>
         )} />
         <Route render={(navProps) => (
           <NoteForm {...props} {...navProps} />
