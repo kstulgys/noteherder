@@ -10,7 +10,6 @@ class App extends Component {
     super();
     this.state = {
       notes: {},
-      currentNoteId: null,
       uid: null,
    }
   }
@@ -43,15 +42,6 @@ getUserFromLocalStorage = () => {
     )
   }
 
-  
-  setCurrentNote = (note) => {
-    this.setState({currentNoteId: note.id})
-  }
-
-  resetCurrentNote = (note) => {
-    this.setCurrentNote({id: null})
-  }
-
   saveNote = (note) => {
     let shouldRedirect = false
     if (!note.id) {
@@ -60,7 +50,7 @@ getUserFromLocalStorage = () => {
     }
     const notes = {...this.state.notes}
     notes[note.id] = note
-    this.setState({ notes, currentNote: note })
+    this.setState({ notes })
     if (shouldRedirect) {
       this.props.history.push(`/notes/${note.id}`)
     }
@@ -99,8 +89,6 @@ getUserFromLocalStorage = () => {
       uid: null,
       notes: {},
     })
-
-    this.resetCurrentNote()
   }
 
   signOut = () => {
@@ -112,10 +100,6 @@ getUserFromLocalStorage = () => {
       saveNote: this.saveNote,
       removeNote: this.removeNote,
       signOut: this.signOut,
-    }
-    const noteData = {
-      notes: this.state.notes,
-      currentNoteId: this.state.currentNoteId,
     }
 
     return (
@@ -135,7 +119,7 @@ getUserFromLocalStorage = () => {
               this.signedIn() 
               ? <Main 
                 {...actions}
-                {...noteData}
+                notes={this.state.notes}
               />
               : <Redirect to="/sign-in" />
             )} 
