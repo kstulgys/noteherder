@@ -1,9 +1,10 @@
 import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 import './Main.css'
 import Sidebar from './Sidebar'
 import NoteList from './NoteList'
 import NoteForm from './NoteForm'
-import { Route, Switch } from 'react-router-dom'
+
 
 
 const Main = (props) => {

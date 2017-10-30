@@ -35,19 +35,13 @@ class NoteForm extends Component {
   hangleChanges = (ev) => {
     const note = {...this.state.note}
     note[ev.target.name] = ev.target.value
-    this.setState(
-      {note},
-      () => this.props.saveNote(note)
-    )
+    this.setState({ note }, () => this.props.saveNote(note))
   }
 
   handleEditorChanges = (editorValue) => {
     const note = {...this.state.note}
     note.body = editorValue.toString('html')
-    this.setState(
-      { note, editorValue },
-      () => this.props.saveNote(note)
-    )
+    this.setState({ note, editorValue }, () => this.props.saveNote(note))
   }
 
   render() {
@@ -72,7 +66,8 @@ class NoteForm extends Component {
               />
             </p>
             
-            <RichTextEditor name="body"
+            <RichTextEditor 
+              name="body"
               value={this.state.editorValue}
               onChange={this.handleEditorChanges}
             >
