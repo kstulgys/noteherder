@@ -110,7 +110,7 @@ getUserFromLocalStorage = () => {
   render() {
     const actions = {
       saveNote: this.saveNote,
-      removeCurrentNote: this.removeCurrentNote,
+      removeNote: this.removeNote,
       signOut: this.signOut,
     }
     const noteData = {
