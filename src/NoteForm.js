@@ -12,7 +12,7 @@ class NoteForm extends Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
-    const noteId = nextProps.currentNoteId
+    const noteId = nextProps.match.params.id
     const note = nextProps.notes[noteId] || this.blankNote()
 
     let editorValue = this.state.editorValue
