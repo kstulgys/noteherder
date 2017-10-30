@@ -3,7 +3,7 @@ import React from 'react';
 import Note from './Note'
 import './NoteList.css'
 
-const NoteList = ({notes, setCurrentNote}) => {
+const NoteList = ({notes}) => {
   
   const noteIds = Object.keys(notes)
 
@@ -12,8 +12,7 @@ const NoteList = ({notes, setCurrentNote}) => {
       <h3>Notes</h3>
       <ul id="notes">
         {noteIds.map(noteId => (
-          <Note
-          setCurrentNote={setCurrentNote} 
+          <Note 
           note={notes[noteId]} key={noteId}/>
         ))}
         
