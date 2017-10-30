@@ -53,13 +53,20 @@ getUserFromLocalStorage = () => {
   }
 
   saveNote = (note) => {
-    const notes = {...this.state.notes}
+    let shouldRedirect = false
     if (!note.id) {
       note.id = Date.now()
+      shouldRedirect = true
     }
+
+    const notes = {...this.state.notes}    
     notes[note.id] = note
+
     this.setState({ notes })
-    this.setCurrentNote(note)
+
+    if (shouldRedirect) {
+      this.props.history.push(`/notes/${note.id}`)
+    }
   }
 
   removeCurrentNote = (note) => {
