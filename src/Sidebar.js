@@ -1,19 +1,19 @@
 
 import React from 'react';
 import './Sidebar.css'
+import { Link } from 'react-router-dom'
 
-const Sidebar = ({ resetCurrentNote, signOut }) => {
+const Sidebar = ({ signOut }) => {
   return (
     <nav className="Sidebar">
       <div className="logo">
         <img src="media/quill.svg" alt="Noteherder"/>
       </div>
-      <a className="new-note"
-        onClick={resetCurrentNote}
+      <Link to="/notes" className="new-note"
       >
         <img src="media/new-hover.png" alt="New note"/>
         <img className="outline" src="media/new.png" alt="New note"/>
-      </a>
+      </Link>
       <div className="SignOut">
         <button onClick={signOut}>
           <i className="fa fa-sign-out"></i>
