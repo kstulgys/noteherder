@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const Note = ({ note, setCurrentNote }) => {
   const handleClick = () => {
     setCurrentNote(note)

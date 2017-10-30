@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom'
 import Main from './Main'
 import base, {auth} from './base'
 import SignIn from './SignIn'
@@ -115,11 +116,19 @@ getUserFromLocalStorage = () => {
 
     return (
       <div className="App">
-        {
-          this.signedIn() ? 
-          <Main  {...noteData}{...actions}/> 
-          : <SignIn  handleAuth={this.handleAuth}/> 
-        }
+        <Switch>
+          <Route path="/sign-in" component={SignIn} />
+          <Route 
+          path="/notes" 
+          render={() => (
+            <Main 
+              {...actions}
+              {...noteData}
+
+            />
+          )} 
+          />
+        </Switch>
 
 
       </div>
@@ -128,3 +137,8 @@ getUserFromLocalStorage = () => {
 }
 
 export default App;
+// {
+//   this.signedIn() ? 
+//   <Main  {...noteData}{...actions}/> 
+//   : <SignIn  handleAuth={this.handleAuth}/> 
+// }
