@@ -136,17 +136,16 @@ getUserFromLocalStorage = () => {
               : <Redirect to="/sign-in" />
             )} 
           />
+          <Route render={() => (
+            this.signedIn()
+            ? <Redirect to="/notes" />
+            : <Redirect to="/sign-in" />
+           )}
+          />
         </Switch>
-
-
       </div>
     );
   }
 }
 
 export default App;
-// {
-//   this.signedIn() ? 
-//   <Main  {...noteData}{...actions}/> 
-//   : <SignIn  handleAuth={this.handleAuth}/> 
-// }
