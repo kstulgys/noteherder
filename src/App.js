@@ -61,7 +61,7 @@ getUserFromLocalStorage = () => {
   removeNote = (note) => {
     const notes = {...this.state.notes}
     notes[note.id] = null
-    this.resetCurrentNote()
+
     this.setState(
       { notes },
       this.props.history.replace('/notes')
