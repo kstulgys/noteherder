@@ -49,37 +49,41 @@ class NoteForm extends Component {
     this.setState({ note, editorValue }, () => this.props.saveNote(note))
   }
 
+
+  handleRemove = () => {
+    this.props.removeNote(this.state.note)
+  }
+
   render() {
     return (
       <div className="NoteForm">
-          <div className="form-actions">
-            <button 
-              type="button"
-              onClick={() => this.props.removeNote(this.state.note)}
-            >
-              <i className="fa fa-trash-o"></i>
-            </button>
-          </div>
-          <form>
-            <p>
-              <input
-                type="text"
-                name="title"
-                placeholder="Title your note"
-                value={this.state.note.title}
-                onChange={this.hangleChanges}
-              />
-            </p>
-            
-            <RichTextEditor 
-              name="body"
-              value={this.state.editorValue}
-              onChange={this.handleEditorChanges}
-            >
-
-            </RichTextEditor>
-          </form>
+        <div className="form-actions">
+          <button
+            type="button"
+            onClick={this.handleRemove}
+          >
+            <i className="fa fa-trash-o"></i>
+          </button>
         </div>
+        <form>
+          <p>
+            <input
+              type="text"
+              name="title"
+              placeholder="Title your note"
+              value={this.state.note.title}
+              onChange={this.handleChanges}
+            />
+          </p>
+          
+          <RichTextEditor
+            name="body"
+            placeholder="Just start typing..."
+            value={this.state.editorValue}
+            onChange={this.handleEditorChanges}
+          ></RichTextEditor>
+        </form>
+      </div>
     );
   }
 }
